@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.xc145214</groupId>
-    <artifactId>springBoot2-docker</artifactId>
+    <artifactId>springboot2-docker</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>springBoot2-docker</name>
+    <name>springboot2-docker</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
