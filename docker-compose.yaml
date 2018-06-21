@@ -1,0 +1,34 @@
+# 表示使用第三代语法
+version: '3'
+# 用来表示 compose 需要启动的服务
+services:
+
+# mysql 服务配置
+  mysql:
+  # 容器名称
+   container_name: v-mysql
+   image: mysql/mysql-server:5.7
+   # 环境变量
+   environment:
+    MYSQL_DATABASE: test
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_ROOT_HOST: '%'
+   # 对外开放端口
+   ports:
+   - "3306:3306"
+   # 如果服务启动不成功会一直尝试
+   restart: always
+
+  springboot2-docker:
+    restart: always
+    build: ./springboot2-docker
+    working_dir: /springboot2-docker
+    volumes:
+      - ./springboot2-docker:/springboot2-docker
+      - ~/.m2:/home/xiac/.m2
+    expose:
+      - "8080"
+    # 依赖服务
+    depends_on:
+      - mysql
+    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker
