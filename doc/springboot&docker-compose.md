@@ -50,7 +50,29 @@ sudo netstat -apn |grep 3306
 tcp6       0      0 :::33060                :::*                    LISTEN      1269/mysqld
 tcp6       0      0 :::3306                 :::*                    LISTEN      1269/mysqld
 ```
+调整后启动
+```sh
+$ docker-compose up
+Recreating v-mysql ... done
+Attaching to v-mysql
+v-mysql  | [Entrypoint] MySQL Docker Image 5.7.22-1.1.5
+v-mysql  | [Entrypoint] Initializing database
+v-mysql  | [Entrypoint] Database initialized
+v-mysql  | Warning: Unable to load '/usr/share/zoneinfo/iso3166.tab' as time zone. Skipping it.
+v-mysql  | Warning: Unable to load '/usr/share/zoneinfo/leapseconds' as time zone. Skipping it.
+v-mysql  | Warning: Unable to load '/usr/share/zoneinfo/tzdata.zi' as time zone. Skipping it.
+v-mysql  | Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it.
+v-mysql  | Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
+v-mysql  |
+v-mysql  | [Entrypoint] ignoring /docker-entrypoint-initdb.d/*
+v-mysql  |
+v-mysql  | [Entrypoint] Server shut down
+v-mysql  |
+v-mysql  | [Entrypoint] MySQL init process done. Ready for start up.
+v-mysql  |
+v-mysql  | [Entrypoint] Starting MySQL 5.7.22-1.1.5
 
+```
 
 ## docker-compose.yaml 文件详解
 ```yaml
