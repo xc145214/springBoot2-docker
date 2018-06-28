@@ -17,20 +17,20 @@ mvn package docker:build
 ```sh
 [xiac@bogon springboot2-docker]$ mvn package docker:build
 ……
-[INFO] Building image springboot/springboot2-docker
+[INFO] Building image springboot/springboot2-docker-01
 Step 1/4 : FROM openjdk:8-jdk-alpine
  ---> 6a6a75aac6c9
 Step 2/4 : VOLUME /tmp
  ---> Using cache
  ---> 159fa5d0b8d2
-Step 3/4 : ADD springboot2-docker-1.0-SNAPSHOT.jar app.jar
- ---> 1b8ac022e62e
-Removing intermediate container c7ed4b4cd4ba
+Step 3/4 : ADD springboot2-docker-01-1.0-SNAPSHOT.jar app.jar
+ ---> a395e0444815
+Removing intermediate container 7dd0408ec856
 Step 4/4 : ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar /app.jar
- ---> Running in 7220798f9091
- ---> 72ab9f116453
-Removing intermediate container 7220798f9091
-Successfully built 72ab9f116453
+ ---> Running in 2f0e1cc9b897
+ ---> 1bad54db592c
+Removing intermediate container 2f0e1cc9b897
+Successfully built 1bad54db592c
 ……
 ```
 查看构建好的镜像
@@ -43,7 +43,7 @@ springboot/springboot2-docker   latest              72ab9f116453        12 secon
 ```
 `springboot/springboot2-docker` 就是我们构建好的镜像，下一步就是运行该镜像
 ```sh
-docker run -p 8080:8080 -t springboot/springboot2-docker
+docker run -p 8080:8080 -t springboot/springboot2-docker-01
 ```
 启动结果
 ```sh
@@ -83,4 +83,16 @@ docker run -p 8080:8080 -t springboot/springboot2-docker
 2018-06-16 05:42:37.803  INFO 1 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
 2018-06-16 05:42:37.804  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
 2018-06-16 05:42:37.825  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 21 ms
+```
+查看结果
+
+```sh
+$ docker ps
+CONTAINER ID        IMAGE                              COMMAND                  CREATED             STATUS              PORTS                    NAMES
+a1e38ba587dc        springboot/springboot2-docker-01   "java -Djava.secur..."   2 minutes ago       Up 2 minutes        0.0.0.0:8080->8080/tcp   zen_stonebraker
+```
+停止
+```sh
+$ docker container stop a1e38ba587dc
+a1e38ba587dc
 ```
