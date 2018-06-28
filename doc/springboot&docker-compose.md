@@ -1,5 +1,57 @@
 # 使用docker-compose 部署简单 springBoot 项目(mysql)
 
+## 启动mysql
+```yaml
+# 表示使用第三代语法
+version: '3'
+# 用来表示 compose 需要启动的服务
+services:
+
+# mysql 服务配置
+  mysql:
+  # 容器名称
+   container_name: v-mysql
+   image: mysql/mysql-server:5.7
+   # 环境变量
+   environment:
+    MYSQL_DATABASE: test
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_ROOT_HOST: '%'
+   # 对外开放端口
+   ports:
+   - "3306:3306"
+   # 如果服务启动不成功会一直尝试
+   restart: always
+```
+启动 
+```sh
+$ docker-compose up
+Creating network "springboot2-docker-02_default" with the default driver
+Pulling mysql (mysql/mysql-server:5.7)...
+Trying to pull repository docker.io/mysql/mysql-server ...
+b0efbbec3b2e: Pull complete
+5053dccc7425: Pull complete
+16b4ec95c155: Pull complete
+8b211b61b1a0: Pull complete
+Digest: sha256:eb3aa08c047efcb3e6bfcc3a28b80a2ec8c67b4315712b26679b0b22320f0b4a
+Status: Downloaded newer image for docker.io/mysql/mysql-server:5.7
+Creating v-mysql ... error
+
+ERROR: for v-mysql  Cannot start service mysql: driver failed programming external connectivity on endpoint v-mysql (60f881aef4b4bd36805defbae245a298a88639003d9adc2cb72ca19b7c1909ae): Error starting userland proxy: listen tcp 0.0.0.0:3306: bind: address already in use
+
+ERROR: for mysql  Cannot start service mysql: driver failed programming external connectivity on endpoint v-mysql (60f881aef4b4bd36805defbae245a298a88639003d9adc2cb72ca19b7c1909ae): Error starting userland proxy: listen tcp 0.0.0.0:3306: bind: address already in use
+ERROR: Encountered errors while bringing up the project.
+
+```
+查看端口
+```sh
+sudo netstat -apn |grep 3306
+[sudo] password for xiac:
+tcp6       0      0 :::33060                :::*                    LISTEN      1269/mysqld
+tcp6       0      0 :::3306                 :::*                    LISTEN      1269/mysqld
+```
+
+
 ## docker-compose.yaml 文件详解
 ```yaml
 # 表示使用第三代语法
@@ -46,3 +98,4 @@ services:
 + volumes: 加载本地目录下的配置文件到容器目标地址下
 + depends_on：可以配置依赖服务，表示需要先启动 depends_on 下面的服务后，再启动本服务。
 + command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker: 表示以这个命令来启动项目，-Dspring-boot.run.profiles=docker表示使用 application-docker.properties文件配置信息进行启动。
+
