@@ -5,6 +5,7 @@ import com.github.xc145214.repository.VisitorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +21,7 @@ public class VisitorController {
     private VisitorRepository repository;
 
     @RequestMapping("/")
+    @ResponseBody
     public String index(HttpServletRequest request) {
         String ip = request.getRemoteAddr();
         Visitor visitor = repository.findByIp(ip);
