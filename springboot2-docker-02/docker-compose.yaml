@@ -20,5 +20,5 @@ services:
    # 如果服务启动不成功会一直尝试
    restart: always
    volumes:
-   - ./mysql/db:src/main/mysql/db
+   - ./mysql/db:/home/xiac/git-work/springboot2-docker/springboot2-docker-02/src/main/mysql/db
 
