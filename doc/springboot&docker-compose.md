@@ -52,7 +52,7 @@ tcp6       0      0 :::3306                 :::*                    LISTEN      
 ```
 调整后启动
 ```sh
-$ docker-compose up
+$ docker-compose up -d
 Recreating v-mysql ... done
 Attaching to v-mysql
 v-mysql  | [Entrypoint] MySQL Docker Image 5.7.22-1.1.5

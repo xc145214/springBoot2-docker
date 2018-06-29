@@ -20,5 +20,5 @@ services:
    # 如果服务启动不成功会一直尝试
    restart: always
    volumes:
-   - ./src/main/mysql/db:/var/lib/mysql
+   - ./mysql/db:src/main/mysql/db
 
