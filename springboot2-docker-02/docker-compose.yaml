@@ -8,6 +8,7 @@ services:
   # 容器名称
    container_name: v-mysql
    image: mysql/mysql-server:5.7
+   command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES utf8mb4;' --innodb-flush-log-at-trx-commit=0
    # 环境变量
    environment:
     MYSQL_DATABASE: test
@@ -18,3 +19,6 @@ services:
    - "3309:3309"
    # 如果服务启动不成功会一直尝试
    restart: always
+   volumes:
+   - ./src/main/mysql/db:/var/lib/mysql
+
