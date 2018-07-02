@@ -16,7 +16,7 @@ services:
     MYSQL_ROOT_HOST: '%'
    # 对外开放端口
    ports:
-   - "3309:3309"
+   - "3306:3309"
    # 如果服务启动不成功会一直尝试
    restart: always
    volumes:
