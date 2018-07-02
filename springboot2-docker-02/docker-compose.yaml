@@ -23,9 +23,10 @@ services:
    - ./mysql/db:/home/xiac/git-work/springboot2-docker/springboot2-docker-02/src/main/mysql/db
 
   app:
-    restart:always
-    build:../springboot2-docker-02
-    working_dir:../springboot2-docker-02
+    container_name: app
+    restart: always
+    build: ../springboot2-docker-02
+    working_dir: ../springboot2-docker-02
     volumes:
     - ./app:/home/xiac/git-work/springboot2-docker/springboot2-docker-02
     - ~/.m2:/home/xiac/.m2
@@ -33,4 +34,4 @@ services:
     - "8080"
     depends_on:
     - mysql
-    command; mvn clean spring-boot:run -Dspring-boot.run.profiles=docker
+    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker
