@@ -5,7 +5,7 @@ version: '3'
 services:
 
 # mysql 服务配置
-  mysql:
+  mysql-master:
   # 容器名称
    container_name: v-mysql-master
    image: mysql/mysql-server:5.7
@@ -22,7 +22,7 @@ services:
    restart: always
 
 # mysql 服务配置
-  mysql:
+  mysql-slave:
   # 容器名称
    container_name: v-mysql-slave
    image: mysql/mysql-server:5.7
